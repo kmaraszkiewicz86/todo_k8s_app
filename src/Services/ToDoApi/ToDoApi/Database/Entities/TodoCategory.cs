@@ -4,8 +4,8 @@
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
-        public ToDoItem ToDoItem { get; set; }
+        public ToDoItem ToDoItem { get; set; } = new();
     }
 }
