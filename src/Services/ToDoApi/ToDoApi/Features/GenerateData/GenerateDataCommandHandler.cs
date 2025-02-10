@@ -1,16 +1,18 @@
-﻿using ToDoApi.Models.Requests;
+﻿using ToDoApi.Features.GenerateData.Interfaces;
 
 namespace ToDoApi.Features.GenerateData
 {
-    public record GenerateDataCommand(ToDoItemRequest request) : IRequest<GenerateDataResult>;
+    public record GenerateDataCommand(GenerateDataRequest Data) : IRequest<GenerateDataResult>;
 
     public record GenerateDataResult(bool IsSuccess);
 
     public class GenerateDataCommandHandler(IDataGeneratorService service) : IRequestHandler<GenerateDataCommand, GenerateDataResult>
     {
-        public Task<GenerateDataResult> Handle(GenerateDataCommand request, CancellationToken cancellationToken)
+        public async Task<GenerateDataResult> Handle(GenerateDataCommand request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(new GenerateDataResult(false));
+            await service.GenerateDataAsync(request.Data);
+
+            return new GenerateDataResult(false);
         }
     }
 }

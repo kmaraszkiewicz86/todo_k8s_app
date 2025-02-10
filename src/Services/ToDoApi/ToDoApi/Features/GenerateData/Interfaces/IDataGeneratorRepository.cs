@@ -1,7 +1,7 @@
 ﻿using ToDoApi.Database.Entities;
 using ToDoApi.Interfaces;
 
-namespace ToDoApi.Features.GenerateData
+namespace ToDoApi.Features.GenerateData.Interfaces
 {
     public interface IDataGeneratorRepository : IRepository
     {

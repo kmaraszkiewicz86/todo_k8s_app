@@ -1,7 +1,4 @@
 ﻿using Carter;
-using ToDoApi.Database.Entities;
-using ToDoApi.Interfaces;
-using ToDoApi.Models.Requests;
 
 namespace ToDoApi.Features.GenerateData
 {
@@ -9,7 +6,7 @@ namespace ToDoApi.Features.GenerateData
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapPost("/GenerateData", (ToDoItemRequest request, IMediator mediator) =>
+            app.MapPost("/GenerateRandomData", (GenerateDataRequest request, IMediator mediator) =>
             {
                 return mediator.Send(new GenerateDataCommand(request));
             });
