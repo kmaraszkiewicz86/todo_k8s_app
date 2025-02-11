@@ -1,0 +1,9 @@
+@hostname=localhost
+@port=5116
+
+
+POST http://{{hostname}}:{{port}}/GenerateRandomData
+Content-Type: application/json
+{
+	"ItemLength": 1500
+}

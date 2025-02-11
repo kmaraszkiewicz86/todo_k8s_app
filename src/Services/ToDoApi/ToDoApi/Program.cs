@@ -1,22 +1,28 @@
+using Carter;
 using FluentValidation;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ToDoApi;
 using ToDoApi.Database;
+using ToDoApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(Program).Assembly;
+
+builder.Services
+    .AddDatabaseContext(builder.Configuration)
+    .AddRepositories()
+    .AddServices();
 
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(assembly);
 });
+
 builder.Services.AddValidatorsFromAssembly(assembly);
 
-//builder.Services.AddCarter();
-
-builder.Services.AddDbContext<ToDoDbContext>(opt => opt.UseSqlServer("ToDoList"));
+builder.Services.AddCarter();
 
 var app = builder.Build();
+
+app.MapCarter();
 
 app.Run();
