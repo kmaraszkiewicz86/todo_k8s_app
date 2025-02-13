@@ -9,12 +9,12 @@
         public DateTime? DueDate { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
-        public string? Category { get; set; }
-
         public int PriorityLevelId { get; set; }
         public PriorityLevel PriorityLevel { get; set; } = null!;
-        public int TodoCategoryId { get; set; }
-        public TodoCategory TodoCategory { get; set; } = null!;
+        public int CategoryId { get; set; }
+        public TodoCategory Category { get; set; } = null!;
+        public int StatusId { get; set; }
+        public ToDoStatus Status { get; set; } = null!;
         public List<Tag> Tags { get; set; } = new();
     }
 }

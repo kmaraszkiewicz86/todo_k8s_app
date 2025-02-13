@@ -6,6 +6,6 @@
 
         public string Name { get; set; } = string.Empty;
 
-        public ToDoItem ToDoItem { get; set; } = new();
+        public List<ToDoItem> ToDoItems { get; set; } = new();
     }
 }
