@@ -20,6 +20,13 @@ namespace ToDoApi.Extensions
             return services;
         }
 
+        public static IServiceCollection AddQueries(this IServiceCollection services)
+        {
+            services.AddClassesToDependencyInjection(typeof(IQuery));
+
+            return services;
+        }
+
         public static IServiceCollection AddDatabaseContext(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ToDoDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));

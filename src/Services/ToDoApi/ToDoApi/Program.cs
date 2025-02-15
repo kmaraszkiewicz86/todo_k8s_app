@@ -1,7 +1,5 @@
 using Carter;
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
-using ToDoApi.Database;
 using ToDoApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +7,7 @@ var assembly = typeof(Program).Assembly;
 
 builder.Services
     .AddDatabaseContext(builder.Configuration)
+    .AddQueries()
     .AddRepositories()
     .AddServices();
 
