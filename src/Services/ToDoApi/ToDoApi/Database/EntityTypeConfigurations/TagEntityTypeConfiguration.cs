@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection.Emit;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ToDoApi.Database.Entities;
 
@@ -14,7 +15,9 @@ namespace ToDoApi.Database.EntityTypeConfigurations
 
             builder.Property(u => u.Name)
                 .IsRequired()
-                .HasMaxLength(200);
+            .HasMaxLength(200);
+
+            builder.HasData(Tag.All);
         }
     }
 }

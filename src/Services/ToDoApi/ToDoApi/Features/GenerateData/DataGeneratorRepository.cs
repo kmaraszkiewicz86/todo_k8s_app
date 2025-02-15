@@ -6,9 +6,9 @@ namespace ToDoApi.Features.GenerateData
 {
     public class DataGeneratorRepository(ToDoDbContext context) : IDataGeneratorRepository
     {
-        public Task AddAsync(ToDoItem item)
+        public async Task AddAsync(ToDoItem item)
         {
-            throw new NotImplementedException();
+            await context.AddAsync(item);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using ToDoApi.Database;
 using ToDoApi.Database.Entities;
+using ToDoApi.Features.GenerateData.Helpers;
 using ToDoApi.Features.GenerateData.Interfaces;
-using ToDoApi.Helpers;
 
 namespace ToDoApi.Features.GenerateData
 {
@@ -9,7 +9,7 @@ namespace ToDoApi.Features.GenerateData
     {
         public async Task GenerateDataAsync(GenerateDataRequest request)
         {
-            IEnumerable<ToDoItem> items = FakeDataGenerator.GenerateToDoItems(request.ItemLength);
+            IEnumerable<ToDoItem> items = DataGeneratorHelper.GenerateToDoItems(request.ItemLength);
 
             foreach (ToDoItem item in items) 
             {

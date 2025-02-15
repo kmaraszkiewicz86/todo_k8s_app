@@ -16,11 +16,7 @@ namespace ToDoApi.Database.EntityTypeConfigurations
                 .IsRequired()
                 .HasMaxLength(200);
 
-            builder.HasData(
-                new PriorityLevel { Id = 1, Name = "New" },
-                new PriorityLevel { Id = 2, Name = "In Progress" },
-                new PriorityLevel { Id = 3, Name = "Completed" },
-                new PriorityLevel { Id = 4, Name = "Canceled" });
+            builder.HasData(ToDoStatus.All);
         }
     }
 }

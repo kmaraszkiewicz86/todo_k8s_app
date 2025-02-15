@@ -15,6 +15,6 @@
         public TodoCategory Category { get; set; } = null!;
         public int StatusId { get; set; }
         public ToDoStatus Status { get; set; } = null!;
-        public List<Tag> Tags { get; set; } = new();
+        public ICollection<Tag> Tags { get; set; } = [];
     }
 }

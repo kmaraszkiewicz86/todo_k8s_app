@@ -16,13 +16,7 @@ namespace ToDoApi.Database.EntityTypeConfigurations
                 .IsRequired()
                 .HasMaxLength(200);
 
-            builder.HasData(
-                new PriorityLevel { Id = 1, Name = "Work" },
-                new PriorityLevel { Id = 2, Name = "Home" },
-                new PriorityLevel { Id = 3, Name = "Shopping" },
-                new PriorityLevel { Id = 4, Name = "Health & Fitness" },
-                new PriorityLevel { Id = 5, Name = "Personal Development" },
-                new PriorityLevel { Id = 6, Name = "Events" });
+            builder.HasData(TodoCategory.All);
         }
     }
 }
