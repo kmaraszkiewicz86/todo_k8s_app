@@ -1,18 +1,26 @@
-﻿using ToDoApi.Features.GenerateData.Interfaces;
+﻿using FluentResults;
+using FluentValidation.Results;
+using ToDoApi.Extensions;
+using ToDoApi.Features.GenerateData.Interfaces;
 
 namespace ToDoApi.Features.GenerateData
 {
-    public record GenerateDataCommand(GenerateDataRequest Data) : IRequest<GenerateDataResult>;
+    public record GenerateDataCommand(int ItemLength) : IRequest<Result>;
 
-    public record GenerateDataResult(bool IsSuccess);
-
-    public class GenerateDataCommandHandler(IDataGeneratorService service) : IRequestHandler<GenerateDataCommand, GenerateDataResult>
+    public class GenerateDataCommandHandler(IDataGeneratorService service, GenerateDataCommandValidator validator) : IRequestHandler<GenerateDataCommand, Result>
     {
-        public async Task<GenerateDataResult> Handle(GenerateDataCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(GenerateDataCommand request, CancellationToken cancellationToken)
         {
-            await service.GenerateDataAsync(request.Data);
+            ValidationResult result = validator.Validate(request);
 
-            return new GenerateDataResult(false);
+            if (!result.IsValid)
+            {
+                return Result.Fail(result.Errors.ToErrorMessages());
+            }
+
+            await service.GenerateDataAsync(request);
+
+            return Result.Ok();
         }
     }
 }

@@ -6,9 +6,9 @@ namespace ToDoApi.Features.GenerateData
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapPost("/GenerateRandomData", (GenerateDataRequest request, IMediator mediator) =>
+            app.MapPost("/GenerateRandomData", (GenerateDataCommand request, IMediator mediator) =>
             {
-                return mediator.Send(new GenerateDataCommand(request));
+                return mediator.Send(request);
             });
         }
     }

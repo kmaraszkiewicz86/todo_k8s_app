@@ -7,7 +7,7 @@ namespace ToDoApi.Features.GenerateData
 {
     public class DataGeneratorService(IDataGeneratorRepository repository, IUnitOfWork unitOfWork) : IDataGeneratorService
     {
-        public async Task GenerateDataAsync(GenerateDataRequest request)
+        public async Task GenerateDataAsync(GenerateDataCommand request)
         {
             IEnumerable<ToDoItem> items = DataGeneratorHelper.GenerateToDoItems(request.ItemLength);
 

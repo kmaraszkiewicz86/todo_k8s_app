@@ -4,6 +4,6 @@ namespace ToDoApi.Features.GenerateData.Interfaces
 {
     public interface IDataGeneratorService : IService
     {
-        Task GenerateDataAsync(GenerateDataRequest request);
+        Task GenerateDataAsync(GenerateDataCommand request);
     }
 }
