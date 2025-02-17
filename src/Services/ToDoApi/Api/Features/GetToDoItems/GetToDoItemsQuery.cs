@@ -7,7 +7,6 @@ namespace ToDoApi.Features.GetToDoItems
     {
         public static GetToDoItemsQuery Parse(string s, IFormatProvider? provider)
         {
-            // Rozdzielamy ciąg wejściowy na dwa elementy, np. "20,2" -> ["20", "2"]
             var parts = s.Split(',');
 
             if (parts.Length != 2)
@@ -15,7 +14,6 @@ namespace ToDoApi.Features.GetToDoItems
                 throw new FormatException("Input string does not have the correct format.");
             }
 
-            // Próbujemy sparsować oba elementy
             if (int.TryParse(parts[0], NumberStyles.Integer, provider, out var itemCountOnPage) &&
                 int.TryParse(parts[1], NumberStyles.Integer, provider, out var pageNumber))
             {
@@ -32,16 +30,13 @@ namespace ToDoApi.Features.GetToDoItems
         {
             result = null;
 
-            // Jeśli s jest null, zwróć false
             if (string.IsNullOrEmpty(s))
             {
                 return false;
             }
 
-            // Rozdzielamy ciąg wejściowy na dwa elementy
             var parts = s.Split(',');
 
-            // Sprawdzamy, czy mamy dokładnie dwa elementy
             if (parts.Length == 2 &&
                 int.TryParse(parts[0], NumberStyles.Integer, provider, out var itemCountOnPage) &&
                 int.TryParse(parts[1], NumberStyles.Integer, provider, out var pageNumber))
