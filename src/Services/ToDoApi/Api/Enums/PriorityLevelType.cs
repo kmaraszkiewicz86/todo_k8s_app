@@ -1,6 +1,6 @@
 ﻿namespace ToDoApi.Enums
 {
-    public enum PriorityLevel
+    public enum PriorityLevelType
     {
         None = 0,
         Low = 1,

@@ -1,5 +1,4 @@
 ﻿using ToDoApi.Database.Entities;
-using ToDoApi.Features.GenerateData;
 
 namespace ToDoApi.Features.GenerateData.Helpers
 {
@@ -7,7 +6,7 @@ namespace ToDoApi.Features.GenerateData.Helpers
     {
         public static IEnumerable<ToDoItem> GenerateToDoItems(int itemLenght)
         {
-            TodoItemAggregate aggregate = new();
+            GenerateDataAggregate aggregate = new();
             aggregate.GenerateRandomData(itemLenght);
 
             foreach (var item in aggregate.Items)

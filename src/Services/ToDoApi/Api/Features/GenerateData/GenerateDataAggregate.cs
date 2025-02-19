@@ -4,20 +4,20 @@ using ToDoApi.Database.Entities;
 
 namespace ToDoApi.Features.GenerateData
 {
-    public class TodoItemAggregate
+    public class GenerateDataAggregate
     {
         private readonly Fixture _fixture = new ();
         private readonly List<ToDoItem> _toDoItems = [];
-        public ReadOnlyCollection<ToDoItem> Items => _toDoItems.AsReadOnly();
+        public List<ToDoItem> Items => _toDoItems;
 
-        public TodoItemAggregate()
+        public GenerateDataAggregate()
         {
             _fixture.Customize<ToDoItem>(c => c
+                .Without(x => x.Id)
                 .Without(x => x.PriorityLevel)
                 .Without(x => x.Category)
                 .Without(x => x.Status)
                 .Without(x => x.Tags)
-                .With(x => x.Id, _fixture.Create<int>())
                 .With(x => x.Title, _fixture.Create<string>())
                 .With(x => x.IsCompleted, _fixture.Create<bool>())
                 .With(x => x.CreatedAt, _fixture.Create<DateTime>())
@@ -29,7 +29,8 @@ namespace ToDoApi.Features.GenerateData
         {
             for (int i = 0; i < count; i++) 
             {
-                _toDoItems.Add(GenerateToDoItem());
+                ToDoItem item = GenerateToDoItem();
+                _toDoItems.Add(item);
             }
         }
 
@@ -40,11 +41,20 @@ namespace ToDoApi.Features.GenerateData
 
             ToDoItem item = _fixture.Create<ToDoItem>();
 
+            item.PriorityLevel = GeneratePriorityLevel();
             item.Category = GenerateCategory();
             item.Status = GenerateStatus();
             item.Tags = GenerateTags(length);
 
             return item;
+        }
+
+        private static PriorityLevel GeneratePriorityLevel()
+        {
+            Random random = new();
+            int index = random.Next(0, PriorityLevel.All.Count - 1);
+
+            return PriorityLevel.All[index];
         }
 
         private static TodoCategory GenerateCategory()
@@ -63,7 +73,7 @@ namespace ToDoApi.Features.GenerateData
             return ToDoStatus.All[index];
         }
 
-        private static ICollection<Tag> GenerateTags(int count)
+        private static HashSet<Tag> GenerateTags(int count)
         {
             HashSet<Tag> tags = [];
 

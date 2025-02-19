@@ -27,7 +27,7 @@ namespace ToDoApi.Database
 
             foreach (var config in configurations)
             {
-                var entityType = config!.GetType().GetInterfaces().First().GetGenericArguments().First();
+                var entityType = config!.GetType().GetInterfaces()[0].GetGenericArguments()[0];
                 var applyMethod = applyGenericMethod.MakeGenericMethod(entityType);
                 applyMethod.Invoke(modelBuilder, new[] { config });
             }
