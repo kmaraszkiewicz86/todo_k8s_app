@@ -13,7 +13,11 @@ namespace ToDoApi.Database.EntityTypeConfigurations
             builder.HasKey(u => u.Id);
 
             builder.Property(u => u.Title)
+                .HasMaxLength(150)
                 .IsRequired();
+
+            builder.Property(e => e.Description)
+                .HasColumnType("nvarchar(MAX)");
 
             builder.Property(u => u.IsCompleted)
                 .IsRequired();
@@ -26,6 +30,7 @@ namespace ToDoApi.Database.EntityTypeConfigurations
 
             builder.Property(u => u.StatusId)
                 .IsRequired();
+
         }
     }
 }
