@@ -7,7 +7,7 @@
         DateTime? DueDate,
         DateTime CreatedAt,
         DateTime? UpdatedAt,
-        string[] PriorityLevelName,
+        string PriorityLevelName,
         string CategoryName,
         string Status,
         string[] Tags

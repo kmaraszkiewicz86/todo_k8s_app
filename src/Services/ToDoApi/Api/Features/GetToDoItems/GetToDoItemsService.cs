@@ -9,8 +9,7 @@ namespace ToDoApi.Features.GetToDoItems
         {
             ToDoItem[] items = await databaseQuery.GetAllItemsAsync(query);
 
-            //add mapper
-            return null;
+            return GetToDoItemsFactory.GenerateResponseItems(items);
         }
     }
 }
