@@ -4,13 +4,13 @@ using ToDoApi.Database.Entities;
 
 namespace ToDoApi.Features.GenerateData
 {
-    public class GenerateDataAggregate
+    public class GenerateDataFactory
     {
         private readonly Fixture _fixture = new ();
         private readonly List<ToDoItem> _toDoItems = [];
         public List<ToDoItem> Items => _toDoItems;
 
-        public GenerateDataAggregate()
+        public GenerateDataFactory()
         {
             _fixture.Customize<ToDoItem>(c => c
                 .Without(x => x.Id)

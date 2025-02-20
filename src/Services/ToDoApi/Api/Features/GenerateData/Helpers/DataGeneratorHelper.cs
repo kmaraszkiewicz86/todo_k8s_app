@@ -6,7 +6,7 @@ namespace ToDoApi.Features.GenerateData.Helpers
     {
         public static IEnumerable<ToDoItem> GenerateToDoItems(int itemLenght)
         {
-            GenerateDataAggregate aggregate = new();
+            GenerateDataFactory aggregate = new();
             aggregate.GenerateRandomData(itemLenght);
 
             foreach (var item in aggregate.Items)
