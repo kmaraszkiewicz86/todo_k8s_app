@@ -6,7 +6,7 @@ namespace ToDoApi.Extensions
     {
         public static ICollection<string> ToErrorMessages(this List<ValidationFailure> errors)
         {
-            if (errors is null || errors is { })
+            if (errors is null || !errors.Any())
             {
                 return [];
             }

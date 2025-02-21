@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using AutoFixture;
+using Bogus;
 using ToDoApi.Database.Entities;
 
 namespace ToDoApi.Features.GenerateData
@@ -7,8 +8,10 @@ namespace ToDoApi.Features.GenerateData
     public class GenerateDataFactory
     {
         private readonly Fixture _fixture = new ();
+        private readonly Faker _faker = new();
         private readonly List<ToDoItem> _toDoItems = [];
-        public List<ToDoItem> Items => _toDoItems;
+
+        public ReadOnlyCollection<ToDoItem> Items => _toDoItems.AsReadOnly();
 
         public GenerateDataFactory()
         {
@@ -18,7 +21,6 @@ namespace ToDoApi.Features.GenerateData
                 .Without(x => x.Category)
                 .Without(x => x.Status)
                 .Without(x => x.Tags)
-                .With(x => x.Title, _fixture.Create<string>())
                 .With(x => x.IsCompleted, _fixture.Create<bool>())
                 .With(x => x.CreatedAt, _fixture.Create<DateTime>())
                 .With(x => x.DueDate, _fixture.Create<DateTime?>())
@@ -41,6 +43,8 @@ namespace ToDoApi.Features.GenerateData
 
             ToDoItem item = _fixture.Create<ToDoItem>();
 
+            item.Title = _faker.Lorem.Sentence(length);
+            item.Description = _faker.Lorem.Paragraph(length * 5);
             item.PriorityLevel = GeneratePriorityLevel();
             item.Category = GenerateCategory();
             item.Status = GenerateStatus();

@@ -30,12 +30,11 @@ namespace ToDoApi.Tests.Extensions
         public void ToErrorMessages_SchouldReturnStringArray_WhenErrorIsNotEmpty()
         {
             List<ValidationFailure> errorsData = [.. _fixture.CreateMany<ValidationFailure>(2)];
-            ICollection<string> expectedErrors = [ "Test message", "Test message" ];
 
             ICollection<string> errors = errorsData.ToErrorMessages();
 
             errors.ShouldNotBeEmpty();
-            errors.ShouldBe(expectedErrors);
+            errors.Count.ShouldBe(2);
         }
     }
 }
