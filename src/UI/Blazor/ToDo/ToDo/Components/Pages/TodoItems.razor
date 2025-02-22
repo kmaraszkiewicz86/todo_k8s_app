@@ -1,0 +1,47 @@
+﻿@page "/TodoItems"
+@attribute [StreamRendering]
+@using Services;
+@using ToDo.Models
+@inject IToDoHttpService httpService;
+
+<PageTitle>Todo Items</PageTitle>
+
+<h1>Todo Items</h1>
+
+@if (todoItems is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Category name</th>
+                <th>Create date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (GetToDoItemsResponse todoItem in todoItems)
+            {
+                <tr>
+                    <td>@todoItem.Title</td>
+                    <td>@todoItem.Description</td>
+                    <td>@todoItem.CategoryName</td>
+                    <td>@todoItem.CreatedAt</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private GetToDoItemsResponse[]? todoItems;
+
+    protected override async Task OnInitializedAsync()
+    {
+        todoItems = await httpService.GetItemsAsync(50, 1);
+    }
+}
