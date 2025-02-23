@@ -2,12 +2,19 @@
 
 namespace ToDo.Services
 {
+
     public class ToDoHttpService(HttpClient httpClient) : IToDoHttpService
     {
         public async Task<GetToDoItemsResponse[]> GetItemsAsync(int itemCountOnPage, int pageNumber)
         {
-            return await httpClient.GetFromJsonAsync<GetToDoItemsResponse[]>($"GenerateRandomData/{itemCountOnPage}/{pageNumber}")
-                   ?? [];
+            var response = await httpClient.GetFromJsonAsync<Result<GetToDoItemsResponse[]>>($"GenerateRandomData/{itemCountOnPage}/{pageNumber}");
+
+            if (response!.IsFailed)
+            {
+                return [];
+            }
+
+            return response.Value;
         }
     }
 }
