@@ -1,5 +1,4 @@
 ﻿@page "/TodoItems"
-@attribute [StreamRendering]
 @using Services;
 @using ToDo.Models
 @inject IToDoHttpService httpService;
@@ -8,37 +7,65 @@
 
 <h1>Todo Items</h1>
 
-@if (todoItems is null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Category name</th>
-                <th>Create date</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (GetToDoItemsResponse todoItem in todoItems)
-            {
+<div class="row">
+    <div class="col-12">
+        <button class="btn btn-primary mb-3" disabled="@IsLoading" @onclick="GenerateTestDataAsync">
+            @(IsLoading ? "Loading..." : "Generate test data")
+        </button>
+    </div>
+    <div class="col-12">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@todoItem.Title</td>
-                    <td>@todoItem.Description</td>
-                    <td>@todoItem.CategoryName</td>
-                    <td>@todoItem.CreatedAt</td>
+                    <th>Title</th>
+                    <th>Category name</th>
+                    <th>Create date</th>
+                    <th>Details</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
+            </thead>
+            <tbody>
+                @if (todoItems is null)
+                {
+                    <tr>
+                        <td colspan="4">Loading...</td>
+                    </tr>
+                }
+                else if (!todoItems.Any())
+                {
+                    <tr>
+                        <td >No data found. Please click generate data</td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (GetToDoItemsResponse todoItem in todoItems)
+                    {
+                        <tr>
+                            <td>@todoItem.Title</td>
+                            <td>@todoItem.Description</td>
+                            <td>@todoItem.CategoryName</td>
+                            <td>@todoItem.CreatedAt</td>
+                            <td></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
 @code {
     private GetToDoItemsResponse[]? todoItems;
+    private bool processing;
+    private bool IsLoading => processing || todoItems == null;
+
+
+    protected async Task GenerateTestDataAsync()
+    {
+        processing = true;
+        await httpService.GenerateTestDataAsync(1);
+        processing = false;
+    }
 
     protected override async Task OnInitializedAsync()
     {

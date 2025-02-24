@@ -1,10 +1,24 @@
-﻿using ToDo.Models;
+﻿using FluentResults;
+using ToDo.Models;
 
 namespace ToDo.Services
 {
 
     public class ToDoHttpService(HttpClient httpClient) : IToDoHttpService
     {
+        public async Task<Result> GenerateTestDataAsync(int itemCount)
+        {
+            GenerateDataRequest request = new(itemCount);
+            var response = await httpClient.PostAsJsonAsync($"GenerateRandomData", request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return Result.Fail("Someting went wrong while processing request");
+            }
+
+            return Result.Ok();
+        }
+
         public async Task<GetToDoItemsResponse[]> GetItemsAsync(int itemCountOnPage, int pageNumber)
         {
             var response = await httpClient.GetFromJsonAsync<Result<GetToDoItemsResponse[]>>($"GenerateRandomData/{itemCountOnPage}/{pageNumber}");
