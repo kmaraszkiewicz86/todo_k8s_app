@@ -43,7 +43,7 @@
             return new Result<T> { IsSuccess = true, Value = value };
         }
 
-        public static Result<T> Fail(string errorMessage)
+        public new static Result<T> Fail(string errorMessage)
         {
             var result = new Result<T> { IsSuccess = false };
             result.Reasons.Add(new Reason { Message = errorMessage });
