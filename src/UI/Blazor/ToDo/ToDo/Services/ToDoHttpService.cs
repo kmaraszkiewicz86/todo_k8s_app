@@ -1,5 +1,4 @@
-﻿using FluentResults;
-using ToDo.Models;
+﻿using ToDo.Models;
 
 namespace ToDo.Services
 {
@@ -21,7 +20,8 @@ namespace ToDo.Services
 
         public async Task<GetToDoItemsResponse[]> GetItemsAsync(int itemCountOnPage, int pageNumber)
         {
-            var response = await httpClient.GetFromJsonAsync<Result<GetToDoItemsResponse[]>>($"GenerateRandomData/{itemCountOnPage}/{pageNumber}");
+            Result<GetToDoItemsResponse[]>? response = await httpClient
+                .GetFromJsonAsync<Result<GetToDoItemsResponse[]>>($"GenerateRandomData/{itemCountOnPage}/{pageNumber}");
 
             if (response!.IsFailed)
             {
