@@ -27,10 +27,9 @@ else
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
 }
 
-
+app.UseStaticFiles();
 app.UseAntiforgery();
 
-app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(ToDo.Client._Imports).Assembly);
