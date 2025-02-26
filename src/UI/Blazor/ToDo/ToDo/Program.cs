@@ -1,6 +1,6 @@
+using Todo.Core.Extensions;
+using Todo.Core.Settings;
 using ToDo.Components;
-using ToDo.Services;
-using ToDo.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,10 +10,7 @@ builder.Services.AddRazorComponents()
 
 ToDoApiSettings apiSettings = builder.Configuration.GetSection("ToDoApiSettings")!.Get<ToDoApiSettings>()!;
 
-builder.Services.AddHttpClient<IToDoHttpService, ToDoHttpService>(client =>
-{
-    client.BaseAddress = new Uri(apiSettings.BaseUrl);
-});
+builder.Services.AddHttpClientServices(apiSettings);
 
 var app = builder.Build();
 

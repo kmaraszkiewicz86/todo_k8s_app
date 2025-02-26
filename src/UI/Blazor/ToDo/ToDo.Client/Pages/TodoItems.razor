@@ -1,7 +1,8 @@
 ﻿@page "/TodoItems"
-@using Services;
-@using ToDo.Models
+@rendermode InteractiveWebAssembly
 @inject IToDoHttpService httpService;
+@using Todo.Core.Models
+@using Todo.Core.Services
 
 <PageTitle>Todo Items</PageTitle>
 
@@ -63,7 +64,8 @@
     protected async Task GenerateTestDataAsync()
     {
         processing = true;
-        await httpService.GenerateTestDataAsync(1);
+        await Task.Delay(2000);
+        //await httpService.GenerateTestDataAsync(1);
         processing = false;
     }
 

@@ -1,4 +1,4 @@
-﻿namespace ToDo.Models
+﻿namespace Todo.Core.Models
 {
     public record GetToDoItemsResponse(
         string Title,

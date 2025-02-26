@@ -1,4 +1,4 @@
-﻿namespace ToDo.Settings
+﻿namespace Todo.Core.Settings
 {
     public class ToDoApiSettings
     {

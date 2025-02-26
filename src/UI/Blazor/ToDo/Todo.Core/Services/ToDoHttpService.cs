@@ -1,6 +1,6 @@
-﻿using ToDo.Models;
+﻿using Todo.Core.Models;
 
-namespace ToDo.Services
+namespace Todo.Core.Services
 {
 
     public class ToDoHttpService(HttpClient httpClient) : IToDoHttpService
