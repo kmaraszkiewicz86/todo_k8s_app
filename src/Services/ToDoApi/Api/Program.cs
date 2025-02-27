@@ -12,6 +12,16 @@ builder.Services
     .AddRepositories()
     .AddServices();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(assembly);
@@ -22,6 +32,8 @@ builder.Services.AddValidatorsFromAssembly(assembly);
 builder.Services.AddCarter();
 
 var app = builder.Build();
+
+app.UseCors();
 
 app.UseMiddleware<ExceptionMiddleware>();
 app.MapCarter();
