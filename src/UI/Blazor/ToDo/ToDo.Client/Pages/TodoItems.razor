@@ -64,12 +64,17 @@
     protected async Task GenerateTestDataAsync()
     {
         processing = true;
-        await Task.Delay(2000);
-        //await httpService.GenerateTestDataAsync(1);
+        await httpService.GenerateTestDataAsync(1);
+        await LoadDataAsync();
         processing = false;
     }
 
     protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+    }
+
+    private async Task LoadDataAsync()
     {
         todoItems = await httpService.GetItemsAsync(50, 1);
     }

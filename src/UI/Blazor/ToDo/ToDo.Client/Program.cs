@@ -4,7 +4,11 @@ using Todo.Core.Settings;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-ToDoApiSettings apiSettings = builder.Configuration.GetSection("ToDoApiSettings")!.Get<ToDoApiSettings>()!;
+//todo: put it to config file
+ToDoApiSettings? apiSettings = new ()
+{
+    BaseUrl = "http://localhost:5116/"
+};
 
 builder.Services.AddHttpClientServices(apiSettings);
 

@@ -12,6 +12,7 @@ builder.Services
     .AddRepositories()
     .AddServices();
 
+//todo: change to a client url
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
