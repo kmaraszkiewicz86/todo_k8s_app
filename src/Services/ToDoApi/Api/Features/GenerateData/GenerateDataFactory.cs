@@ -22,7 +22,6 @@ namespace ToDoApi.Features.GenerateData
                 .Without(x => x.Status)
                 .Without(x => x.Tags)
                 .With(x => x.IsCompleted, _fixture.Create<bool>())
-                .With(x => x.CreatedAt, _fixture.Create<DateTime>())
                 .With(x => x.DueDate, _fixture.Create<DateTime?>())
             );
         }
@@ -49,6 +48,7 @@ namespace ToDoApi.Features.GenerateData
             item.Category = GenerateCategory();
             item.Status = GenerateStatus();
             item.Tags = GenerateTags(length);
+            item.CreatedAt = DateTime.UtcNow;
 
             return item;
         }
