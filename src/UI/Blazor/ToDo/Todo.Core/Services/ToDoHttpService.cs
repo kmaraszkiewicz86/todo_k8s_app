@@ -5,9 +5,8 @@ namespace Todo.Core.Services
 
     public class ToDoHttpService(HttpClient httpClient) : IToDoHttpService
     {
-        public async Task<Result> GenerateTestDataAsync(int itemCount)
+        public async Task<Result> GenerateTestDataAsync(GenerateDataRequest request)
         {
-            GenerateDataRequest request = new(itemCount);
             var response = await httpClient.PostAsJsonAsync($"GenerateRandomData", request);
 
             if (!response.IsSuccessStatusCode)

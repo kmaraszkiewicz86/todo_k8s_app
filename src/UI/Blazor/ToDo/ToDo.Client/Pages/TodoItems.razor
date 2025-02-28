@@ -10,6 +10,17 @@
 
 <div class="row">
     <div class="col-12">
+        <EditForm EditContext="@EditContext" OnSubmit="GenerateTestDataAsync">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="flex-container">
+                <InputNumber @bind-Value="Model.ItemLength" class="form-control" style="width: 100px;" />
+
+                <button type="submit" class="btn btn-primary">Wyślij</button>
+            </div>
+        </EditForm>
+
         <button class="btn btn-primary mb-3" disabled="@IsLoading" @onclick="GenerateTestDataAsync">
             @(IsLoading ? "Loading..." : "Generate test data")
         </button>
@@ -60,18 +71,36 @@
     private bool processing;
     private bool IsLoading => processing || todoItems == null;
 
+    protected GenerateDataRequest Model { get; set; } = new();
+    protected List<string> ValidationErrors { get; set; } = new();
+    protected EditContext EditContext = default!;
+    protected ValidationMessageStore ValidationMessages = default!;
 
     protected async Task GenerateTestDataAsync()
     {
         processing = true;
-        await httpService.GenerateTestDataAsync(1);
+        await httpService.GenerateTestDataAsync(Model);
         await LoadDataAsync();
         processing = false;
     }
 
     protected override async Task OnInitializedAsync()
     {
+        EditContext = new (Model);
+        ValidationMessages = new(EditContext);
+        EditContext.OnFieldChanged += (sender, eventArgs) => Validate();
+        EditContext.OnValidationRequested += (sender, eventArgs) => Validate();
         await LoadDataAsync();
+    }
+
+    protected void Validate()
+    {
+        ValidationErrors.Clear();
+
+        if (Model.ItemLength < 1 || Model.ItemLength > 200)
+        {
+            ValidationErrors.Add("Count must be in 1 and 200");
+        }
     }
 
     private async Task LoadDataAsync()

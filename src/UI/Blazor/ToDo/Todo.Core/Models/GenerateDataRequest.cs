@@ -1,4 +1,7 @@
 ﻿namespace Todo.Core.Models
 {
-    public record GenerateDataRequest(int ItemLength);
+    public class GenerateDataRequest
+    {
+        public int ItemLength { get; set; }
+    }
 }
