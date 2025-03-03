@@ -14,7 +14,7 @@ namespace ToDoApi.Features.GetToDoItems
                 .Include(i => i.Status)
                 .Include(i => i.Tags)
                 .OrderByDescending(i => i.CreatedAt)
-                .Skip(query.ItemCountOnPage * query.PageNumber)
+                .Skip(query.ItemCountOnPage * (query.PageNumber - 1))
                 .Take(query.ItemCountOnPage)
                 .ToArrayAsync();
 

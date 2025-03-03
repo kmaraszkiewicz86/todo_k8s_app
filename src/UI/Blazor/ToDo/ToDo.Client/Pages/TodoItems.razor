@@ -42,7 +42,7 @@
                         <td colspan="4">Loading...</td>
                     </tr>
                 }
-                else if (!todoItems.Any())
+                else if (!todoItems.Items.Any())
                 {
                     <tr>
                         <td >No data found. Please click generate data</td>
@@ -50,7 +50,7 @@
                 }
                 else
                 {
-                    @foreach (GetToDoItemsResponse todoItem in todoItems)
+                    @foreach (GetToDoItemsResponse todoItem in todoItems.Items)
                     {
                         <tr>
                             <td>@todoItem.Title</td>
@@ -66,9 +66,9 @@
     </div>
 
     <nav aria-label="Pagination">
-        <button @onclick="NextPageAsync" >Prev</button>
-        <span> @(PageNumber + 1) / @totalCount </span>
-        <button @onclick="PrevPageAsync"> Next </button>
+        <button @onclick="PrevPageAsync" disabled="@IsLoading">Prev</button>
+        <span> @PageNumber of @totalCount </span>
+        <button @onclick="NextPageAsync" disabled="@IsLoading"> Next </button>
     </nav>
 </div>
 
@@ -82,7 +82,7 @@
     protected List<string> ValidationErrors { get; set; } = new();
     protected EditContext EditContext = default!;
     protected ValidationMessageStore ValidationMessages = default!;
-    protected int PageNumber { get; set; } = 0;
+    protected int PageNumber { get; set; } = 1;
     protected int PageSize { get; set; } = 50;
 
     protected async Task GenerateTestDataAsync()
@@ -123,7 +123,7 @@
             PageNumber = 0;
         }
 
-        await SetPageAsync(PageNumber);
+        await LoadDataAsync();
     }
 
 
@@ -138,12 +138,6 @@
             PageNumber = totalCount - 1;
         }
 
-        await SetPageAsync(PageNumber);
-    }
-
-    private async Task SetPageAsync(int pageNumber)
-    {
-        PageNumber = pageNumber;
         await LoadDataAsync();
     }
 
