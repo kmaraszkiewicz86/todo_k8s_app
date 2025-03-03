@@ -2,9 +2,12 @@ using Carter;
 using FluentValidation;
 using ToDoApi.Extensions;
 using ToDoApi.Middlewares;
+using ToDoApi.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(Program).Assembly;
+
+var frontendSettings = builder.Configuration.GetSection(nameof(FrontendSettings)).Get<FrontendSettings>()!;
 
 builder.Services
     .AddDatabaseContext(builder.Configuration)
@@ -12,12 +15,11 @@ builder.Services
     .AddRepositories()
     .AddServices();
 
-//todo: change to a client url
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.AllowAnyOrigin()
+        builder.WithOrigins(frontendSettings.FrontendHost)
             .AllowAnyMethod()
             .AllowAnyHeader();
     });

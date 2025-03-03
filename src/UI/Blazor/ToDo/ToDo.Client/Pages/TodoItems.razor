@@ -95,6 +95,9 @@
 
     protected override async Task OnInitializedAsync()
     {
+        if (todoItems is { })
+            return;
+
         EditContext = new (Model);
         ValidationMessages = new(EditContext);
         EditContext.OnFieldChanged += (sender, eventArgs) => Validate();
@@ -120,7 +123,7 @@
         }
         else
         {
-            PageNumber = 0;
+            PageNumber = 1;
         }
 
         await LoadDataAsync();
@@ -129,13 +132,13 @@
 
     protected async Task PrevPageAsync()
     {
-        if (PageNumber > 0)
+        if (PageNumber > 1)
         {
             PageNumber--;
         }
         else
         {
-            PageNumber = totalCount - 1;
+            PageNumber = totalCount;
         }
 
         await LoadDataAsync();
