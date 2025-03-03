@@ -17,5 +17,8 @@ namespace ToDoApi.Features.GetToDoItems
                 .Skip(query.ItemCountOnPage * query.PageNumber)
                 .Take(query.ItemCountOnPage)
                 .ToArrayAsync();
+
+        public async Task<int> GetItemsCountAsync(GetToDoItemsQuery query)
+            => await context.ToDoItems.CountAsync();
     }
 }

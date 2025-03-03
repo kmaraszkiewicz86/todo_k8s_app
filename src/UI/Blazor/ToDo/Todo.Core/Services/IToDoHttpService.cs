@@ -5,6 +5,6 @@ namespace Todo.Core.Services
     public interface IToDoHttpService
     {
         Task<Result> GenerateTestDataAsync(GenerateDataRequest request);
-        Task<GetToDoItemsResponse[]> GetItemsAsync(int itemCountOnPage, int pageNumber);
+        Task<GetToDoItemCollectionResponse> GetItemsAsync(int itemCountOnPage, int pageNumber);
     }
 }

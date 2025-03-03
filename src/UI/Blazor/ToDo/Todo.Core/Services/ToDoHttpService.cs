@@ -17,14 +17,14 @@ namespace Todo.Core.Services
             return Result.Ok();
         }
 
-        public async Task<GetToDoItemsResponse[]> GetItemsAsync(int itemCountOnPage, int pageNumber)
+        public async Task<GetToDoItemCollectionResponse> GetItemsAsync(int itemCountOnPage, int pageNumber)
         {
-            Result<GetToDoItemsResponse[]>? response = await httpClient
-                .GetFromJsonAsync<Result<GetToDoItemsResponse[]>>($"GenerateRandomData/{itemCountOnPage}/{pageNumber}");
+            Result<GetToDoItemCollectionResponse>? response = await httpClient
+                .GetFromJsonAsync<Result<GetToDoItemCollectionResponse>>($"GenerateRandomData/{itemCountOnPage}/{pageNumber}");
 
             if (response!.IsFailed)
             {
-                return [];
+                return new([], 0);
             }
 
             return response.Value;

@@ -4,7 +4,7 @@ namespace ToDoApi.Features.GetToDoItems
 {
     public static class GetToDoItemsFactory
     {
-        public static GetToDoItemsResponse[] GenerateResponseItems(ToDoItem[] toDoItems)
+        public static GetToDoItemCollectionResponse GenerateResponseItems(ToDoItem[] toDoItems, int itemsCount)
         {
             List<GetToDoItemsResponse> items = [];
 
@@ -13,7 +13,7 @@ namespace ToDoApi.Features.GetToDoItems
                 Add(toDoItem, items);
             }
 
-            return [.. items];
+            return new([.. items], itemsCount);
         }
 
         private static void Add(ToDoItem item, List<GetToDoItemsResponse> items)

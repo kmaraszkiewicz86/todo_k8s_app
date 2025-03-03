@@ -64,17 +64,26 @@
             </tbody>
         </table>
     </div>
+
+    <nav aria-label="Pagination">
+        <button @onclick="NextPageAsync" >Prev</button>
+        <span> @(PageNumber + 1) / @totalCount </span>
+        <button @onclick="PrevPageAsync"> Next </button>
+    </nav>
 </div>
 
 @code {
-    private GetToDoItemsResponse[]? todoItems;
+    private GetToDoItemCollectionResponse? todoItems;
     private bool processing;
     private bool IsLoading => processing || todoItems == null;
 
+    protected int totalCount;
     protected GenerateDataRequest Model { get; set; } = new();
     protected List<string> ValidationErrors { get; set; } = new();
     protected EditContext EditContext = default!;
     protected ValidationMessageStore ValidationMessages = default!;
+    protected int PageNumber { get; set; } = 0;
+    protected int PageSize { get; set; } = 50;
 
     protected async Task GenerateTestDataAsync()
     {
@@ -103,8 +112,44 @@
         }
     }
 
+    protected async Task NextPageAsync()
+    {
+        if (PageNumber < totalCount)
+        {
+            PageNumber++;
+        }
+        else
+        {
+            PageNumber = 0;
+        }
+
+        await SetPageAsync(PageNumber);
+    }
+
+
+    protected async Task PrevPageAsync()
+    {
+        if (PageNumber > 0)
+        {
+            PageNumber--;
+        }
+        else
+        {
+            PageNumber = totalCount - 1;
+        }
+
+        await SetPageAsync(PageNumber);
+    }
+
+    private async Task SetPageAsync(int pageNumber)
+    {
+        PageNumber = pageNumber;
+        await LoadDataAsync();
+    }
+
     private async Task LoadDataAsync()
     {
-        todoItems = await httpService.GetItemsAsync(50, 1);
+        todoItems = await httpService.GetItemsAsync(PageSize, PageNumber);
+        totalCount = todoItems.ItemsCount / PageSize;
     }
 }
