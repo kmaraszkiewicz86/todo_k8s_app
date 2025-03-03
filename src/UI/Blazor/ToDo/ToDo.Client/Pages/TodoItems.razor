@@ -17,13 +17,13 @@
             <div class="flex-container">
                 <InputNumber @bind-Value="Model.ItemLength" class="form-control" style="width: 100px;" />
 
-                <button type="submit" class="btn btn-primary">Wyślij</button>
+                <button class="btn btn-primary" disabled="@IsLoading" @onclick="GenerateTestDataAsync">
+                    @(IsLoading ? "Loading..." : "Generate test data")
+                </button>
             </div>
         </EditForm>
 
-        <button class="btn btn-primary mb-3" disabled="@IsLoading" @onclick="GenerateTestDataAsync">
-            @(IsLoading ? "Loading..." : "Generate test data")
-        </button>
+
     </div>
     <div class="col-12">
         <table class="table">
