@@ -4,6 +4,6 @@ namespace ToDoApi.Features.GetToDoItems.Interfaces
 {
     public interface IGetToDoItemsService : IService
     {
-        Task<GetToDoItemsResponse[]> GetAllItemsAsync(GetToDoItemsQuery query);
+        Task<GetToDoItemCollectionResponse> GetAllItemsAsync(GetToDoItemsQuery query);
     }
 }

@@ -5,7 +5,7 @@
 POST http://{{hostname}}:{{port}}/GenerateRandomData
 Content-Type: application/json
 {
-	"ItemLength": 100000
+	"ItemLength": 1
 }
 
 ###

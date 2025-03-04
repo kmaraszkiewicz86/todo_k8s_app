@@ -1,6 +1,5 @@
 ﻿using ToDoApi.Database;
 using ToDoApi.Database.Entities;
-using ToDoApi.Enums;
 using ToDoApi.Exceptions;
 using ToDoApi.Features.GenerateData.Interfaces;
 
