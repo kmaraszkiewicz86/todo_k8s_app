@@ -5,8 +5,6 @@ namespace ToDoApi.Tests.Fixtures
 {
     public class BaseFixture : Fixture
     {
-        protected Fixture fixture = new();
-
         protected BaseFixture()
         {
             Customize(new AutoNSubstituteCustomization());

@@ -6,7 +6,7 @@ namespace ToDoApi.Tests.Fixtures
     {
         public ValidationFailureExtensionFixture()
         {
-            fixture.Customize<ValidationFailure>(c => c.With(v => v.ErrorMessage, "Test message"));
+            this.Customize<ValidationFailure>(c => c.With(v => v.ErrorMessage, "Test message"));
         }
     }
 }

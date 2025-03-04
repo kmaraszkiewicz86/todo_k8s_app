@@ -1,6 +1,6 @@
 ﻿namespace ToDoApi.Features.GetToDoItems
 {
     public record GetToDoItemCollectionResponse(
-        GetToDoItemsResponse[] items,
+        GetToDoItemsResponse[] Items,
         int ItemsCount);
 }
