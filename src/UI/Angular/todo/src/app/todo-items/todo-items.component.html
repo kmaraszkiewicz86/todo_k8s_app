@@ -1,1 +1,10 @@
-<p>todo-items works!</p>
+<div *ngif="items.items.length > 0; else no-data">
+    <ul>
+        <li *ngFor="let item of items.items" >
+            {{ item.title }}
+        </li>
+    </ul>
+</div>
+<ng-template #no-data>
+    <h1>No data</h1>
+</ng-template>
