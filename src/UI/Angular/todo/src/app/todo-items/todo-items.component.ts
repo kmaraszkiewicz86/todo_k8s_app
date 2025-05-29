@@ -2,11 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { TodoItemService } from '../services/todo-item.service';
 import { GetToDoItemCollectionResponse } from '../models/todo-items-models';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-todo-items',
+  standalone: true,
+  imports: [
+    CommonModule,
+    NgIf,
+    NgFor
+  ],
   templateUrl: './todo-items.component.html',
-  styleUrl: './todo-items.component.scss'
+  styleUrls: ['./todo-items.component.scss']
 })
 export class TodoItemsComponent implements OnInit   {
 
