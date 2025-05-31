@@ -2,8 +2,7 @@ import { Component  } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { BrowserModule } from '@angular/platform-browser';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -13,7 +12,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   selector: 'app-root',
   imports: [
     RouterOutlet,
-    BrowserModule
+    CommonModule
   ],
   providers: [],
   templateUrl: './app.component.html',

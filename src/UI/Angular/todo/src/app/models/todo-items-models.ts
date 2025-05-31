@@ -10,8 +10,12 @@ export interface GetToDoItemsResponse {
     status: string,
     tags: string[]
   }
-  
+
   export interface GetToDoItemCollectionResponse {
     items: GetToDoItemsResponse[],
     itemsCount: number
+  }
+
+  export interface GetToDoItemResult {
+    value: GetToDoItemCollectionResponse,
   }

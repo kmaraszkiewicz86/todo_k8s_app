@@ -2,6 +2,6 @@
 {
     public class FrontendSettings
     {
-        public string FrontendHost { get; set; } = string.Empty;
+        public string[] FrontendHosts { get; set; } = [];
     }
 }
