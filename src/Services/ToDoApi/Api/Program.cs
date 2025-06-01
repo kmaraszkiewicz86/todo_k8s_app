@@ -19,7 +19,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins(frontendSettings.FrontendHost)
+        builder.WithOrigins(frontendSettings.FrontendHosts)
             .AllowAnyMethod()
             .AllowAnyHeader();
     });

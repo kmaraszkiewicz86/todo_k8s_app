@@ -10,5 +10,5 @@ Content-Type: application/json
 
 ###
 
-GET http://{{hostname}}:{{port}}/GenerateRandomData/50/1
+GET http://{{hostname}}:{{port}}/GetToDoItems/50/1
 Content-Type: application/json

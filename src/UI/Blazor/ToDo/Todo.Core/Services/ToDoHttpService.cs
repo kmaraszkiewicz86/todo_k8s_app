@@ -20,7 +20,7 @@ namespace Todo.Core.Services
         public async Task<GetToDoItemCollectionResponse> GetItemsAsync(int itemCountOnPage, int pageNumber)
         {
             Result<GetToDoItemCollectionResponse>? response = await httpClient
-                .GetFromJsonAsync<Result<GetToDoItemCollectionResponse>>($"GenerateRandomData/{itemCountOnPage}/{pageNumber}");
+                .GetFromJsonAsync<Result<GetToDoItemCollectionResponse>>($"GetToDoItems/{itemCountOnPage}/{pageNumber}");
 
             if (response!.IsFailed)
             {

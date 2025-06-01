@@ -6,7 +6,7 @@ namespace ToDoApi.Features.GetToDoItems
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapGet("/GenerateRandomData/{ItemCountOnPage}/{PageNumber}", async (int itemCountOnPage, int pageNumber, IMediator mediator)
+            app.MapGet("/GetToDoItems/{ItemCountOnPage}/{PageNumber}", async (int itemCountOnPage, int pageNumber, IMediator mediator)
                 => await mediator.Send(new GetToDoItemsQuery(itemCountOnPage, pageNumber)));
         }
     }

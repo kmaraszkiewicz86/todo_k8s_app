@@ -1,0 +1,10 @@
+<div *ngIf="items.items.length > 0; else nodata">
+    <ul>
+        <li *ngFor="let item of items.items" >
+            {{ item.title }}
+        </li>
+    </ul>
+</div>
+<ng-template #nodata>
+    <h1>No data</h1>
+</ng-template>
