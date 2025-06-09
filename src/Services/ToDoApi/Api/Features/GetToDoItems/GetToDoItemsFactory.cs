@@ -19,6 +19,7 @@ namespace ToDoApi.Features.GetToDoItems
         private static void Add(ToDoItem item, List<GetToDoItemsResponse> items)
         {
             items.Add(new GetToDoItemsResponse(
+                item.Id,
                 item.Title,
                 item.Description,
                 item.IsCompleted,
