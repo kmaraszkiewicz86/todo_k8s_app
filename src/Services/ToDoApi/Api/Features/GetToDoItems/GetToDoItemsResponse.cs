@@ -1,6 +1,7 @@
 ﻿namespace ToDoApi.Features.GetToDoItems
 {
     public record GetToDoItemsResponse(
+        int Id,
         string Title,
         string? Description,
         bool IsCompleted,
